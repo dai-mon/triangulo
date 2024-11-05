@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Triángulo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('fondo.png') no-repeat center center fixed; /* Cambia aquí la ruta */
+            background-size: cover;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.904);
+            padding: 20px;
+            border-radius: 16px;
+            max-width: 350px;
+            width: 100%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        h2 {
+            color: #6a1b9a;
+            margin-bottom: 15px;
+        }
+        input {
+            padding: 8px;
+            width: 100%; /* Mantener el ancho del input al 100% */
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border: 1px solid #cccccc;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            background-color: #7b1fa2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            width: auto; /* Cambiado a auto para ajustar el tamaño al texto */
+            margin-top: 10px; /* Añadido margen para separación */
+        }
+        button:hover {
+            background-color: #6a1b9a;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #4527a0;
+        }
+        .triangle-image {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Triángulo</h2>
+        <label for="lado1">Lado 1:</label>
+        <input type="number" id="lado1" placeholder="Ingresa el primer lado">
+
+        <label for="lado2">Lado 2:</label>
+        <input type="number" id="lado2" placeholder="Ingresa el segundo lado">
+
+        <label for="lado3">Lado 3:</label>
+        <input type="number" id="lado3" placeholder="Ingresa el tercer lado">
+
+        <button onclick="determinarTriangulo()">Determinar tipo de triángulo</button>
+
+        <div class="result" id="resultado"></div>
+        <div class="triangle-image" id="imagenTriangulo"></div>
+    </div>
+
+    <script>
+        function determinarTriangulo() {
+            var lado1 = parseFloat(document.getElementById("lado1").value);
+            var lado2 = parseFloat(document.getElementById("lado2").value);
+            var lado3 = parseFloat(document.getElementById("lado3").value);
+
+            var resultadoDiv = document.getElementById("resultado");
+            var imagenTrianguloDiv = document.getElementById("imagenTriangulo");
+
+            // Limpiar contenido previo
+            resultadoDiv.innerHTML = "";
+            imagenTrianguloDiv.innerHTML = "";
+
+            if (lado1 + lado2 > lado3 && lado1 + lado3 > lado2 && lado2 + lado3 > lado1) {
+                var img = document.createElement('img');
+                img.width = 150;
+
+                if (lado1 === lado2 && lado2 === lado3) {
+                    resultadoDiv.innerHTML = "El triángulo es equilátero (tres lados iguales).";
+                    img.src = 'equilatero.png'; // Reemplaza con la ruta de tu imagen
+                } else if (lado1 === lado2 || lado1 === lado3 || lado2 === lado3) {
+                    resultadoDiv.innerHTML = "El triángulo es isósceles (dos lados iguales).";
+                    img.src = 'isoceles.png'; // Reemplaza con la ruta de tu imagen
+                } else {
+                    resultadoDiv.innerHTML = "El triángulo es escaleno (ningún lado igual).";
+                    img.src = 'escaleno.png'; // Reemplaza con la ruta de tu imagen
+                }
+
+                imagenTrianguloDiv.appendChild(img);
+            } else {
+                resultadoDiv.innerHTML = "Los lados ingresados no forman un triángulo válido.";
+            }
+        }
+    </script>
+</body>
+</html>
